@@ -26,20 +26,13 @@ export default function MiniPhone({ timerFormatted, callEnded, visible }: MiniPh
         style={{
           width: 140,
           height: 280,
-          boxShadow: callEnded
-            ? "0 8px 30px rgba(0,0,0,0.4)"
-            : "0 0 0 1px rgba(34,197,94,0.3), 0 8px 30px rgba(0,0,0,0.5), 0 0 40px rgba(34,197,94,0.05)",
+          boxShadow: "0 8px 30px rgba(0,0,0,0.5)",
         }}
       >
         {/* Mini notch */}
         <div className="absolute left-1/2 top-[5px] z-10 -translate-x-1/2"
           style={{ width: 42, height: 12, borderRadius: 7, backgroundColor: "#000" }}
         />
-
-        {/* Green active border at top */}
-        {!callEnded && (
-          <div className="absolute top-0 left-0 right-0 h-[2px] bg-green-500 z-20 opacity-60" />
-        )}
 
         <div className="flex h-full flex-col items-center justify-center gap-3 px-3">
           <Avatar className="h-9 w-9">

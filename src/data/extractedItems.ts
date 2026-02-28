@@ -26,7 +26,7 @@ export const extractedItems: ExtractedItem[] = [
     specs: "A2-70 Grade, Stainless Steel",
     paymentTerms: "Net 30",
     confidence: 97,
-    appearAfterSeconds: 12,
+    appearAfterSeconds: 3,
   },
   {
     id: "item-2",
@@ -40,7 +40,7 @@ export const extractedItems: ExtractedItem[] = [
     specs: "50mm diameter, BS EN 10204 3.1 Cert Required",
     paymentTerms: "Net 30",
     confidence: 94,
-    appearAfterSeconds: 28,
+    appearAfterSeconds: 8,
   },
   {
     id: "item-3",
@@ -54,7 +54,7 @@ export const extractedItems: ExtractedItem[] = [
     specs: "For valve overhaul application",
     paymentTerms: "Net 30",
     confidence: 95,
-    appearAfterSeconds: 52,
+    appearAfterSeconds: 13,
   },
   {
     id: "item-4",
@@ -68,6 +68,6 @@ export const extractedItems: ExtractedItem[] = [
     specs: "HSS (High Speed Steel)",
     paymentTerms: "Net 30",
     confidence: 98,
-    appearAfterSeconds: 60,
+    appearAfterSeconds: 14,
   },
 ];

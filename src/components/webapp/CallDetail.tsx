@@ -42,14 +42,14 @@ export default function CallDetail({
   const handleCallEnd = useCallback(() => {
     setScreen5State("ended");
     onCallEnd();
-    setTimeout(() => setShowBanner(true), 1500 / speed);
+    setTimeout(() => setShowBanner(true), 800 / speed);
   }, [setScreen5State, onCallEnd, speed]);
 
   const handleReview = useCallback(() => setScreen5State("review"), [setScreen5State]);
 
   useEffect(() => {
     if (showBanner && screen5State === "ended") {
-      const t = setTimeout(() => handleReview(), 2000 / speed);
+      const t = setTimeout(() => handleReview(), 1200 / speed);
       return () => clearTimeout(t);
     }
   }, [showBanner, screen5State, handleReview, speed]);

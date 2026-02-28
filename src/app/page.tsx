@@ -8,7 +8,6 @@ import { useDemoFlow } from "@/hooks/useDemoFlow";
 import SpeedControl from "@/components/shared/SpeedControl";
 import PhoneFrame from "@/components/phone/PhoneFrame";
 import HomeScreen from "@/components/phone/HomeScreen";
-import HexaApp from "@/components/phone/HexaApp";
 import IncomingCall from "@/components/phone/IncomingCall";
 import MiniPhone from "@/components/phone/MiniPhone";
 import BrowserChrome from "@/components/webapp/BrowserChrome";
@@ -43,33 +42,37 @@ function DemoApp() {
   const [phonePhase, setPhonePhase] = useState<"centered" | "shrinking" | "mini">("centered");
   const [showWebApp, setShowWebApp] = useState(false);
   const [webAppView, setWebAppView] = useState<"list" | "detail">("list");
-  const autoRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const [hexaNotificationVisible, setHexaNotificationVisible] = useState(false);
+  const [hexaNotificationResponded, setHexaNotificationResponded] = useState(false);
+  const notificationTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
-    if (screen === 2) {
-      autoRef.current = setTimeout(() => {
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.code === "Space" && screen === 1 && !showIncomingCall) {
+        e.preventDefault();
         setShowIncomingCall(true);
         goToScreen(3);
-      }, 3000 / speed);
-      return () => { if (autoRef.current) clearTimeout(autoRef.current); };
+      }
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [screen, showIncomingCall, goToScreen]);
+
+  useEffect(() => {
+    if (showIncomingCall && !hexaNotificationResponded) {
+      notificationTimerRef.current = setTimeout(() => {
+        setHexaNotificationVisible(true);
+      }, 800 / speed);
     }
-  }, [screen, speed, goToScreen]);
-
-  const handleHexaTap = useCallback(() => goToScreen(2), [goToScreen]);
-
-  const handleSkip = useCallback(() => {
-    if (autoRef.current) clearTimeout(autoRef.current);
-    setShowIncomingCall(true);
-    goToScreen(3);
-  }, [goToScreen]);
+    return () => {
+      if (notificationTimerRef.current) clearTimeout(notificationTimerRef.current);
+    };
+  }, [showIncomingCall, hexaNotificationResponded, speed]);
 
   const handleAccept = useCallback(() => {
     setCallAccepted(true);
     timer.start();
-  }, [setCallAccepted, timer]);
-
-  const handleToggleHexa = useCallback(() => {
-    setHexaToggled(true);
     setTimeout(() => {
       setPhonePhase("shrinking");
       setShowWebApp(true);
@@ -77,8 +80,19 @@ function DemoApp() {
         setPhonePhase("mini");
         goToScreen(4);
       }, 1000 / speed);
-    }, 1500 / speed);
-  }, [setHexaToggled, goToScreen, speed]);
+    }, 500 / speed);
+  }, [setCallAccepted, timer, goToScreen, speed]);
+
+  const handleTrackChoice = useCallback(
+    (choice: "yes" | "no") => {
+      if (choice === "yes") setHexaToggled(true);
+      setHexaNotificationResponded(true);
+      setTimeout(() => {
+        setHexaNotificationVisible(false);
+      }, 300);
+    },
+    [setHexaToggled]
+  );
 
   const handleSelectLive = useCallback(() => {
     setWebAppView("detail");
@@ -111,13 +125,10 @@ function DemoApp() {
 
       <SpeedControl />
 
-      {screen === 2 && !showIncomingCall && (
-        <button
-          onClick={handleSkip}
-          className="fixed bottom-6 right-6 z-50 border border-border bg-card px-3 py-1.5 text-[11px] font-medium text-muted-foreground transition-colors hover:text-foreground"
-        >
-          Skip →
-        </button>
+      {screen === 1 && !showIncomingCall && (
+        <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 text-[11px] font-medium text-muted-foreground/80">
+          Press spacebar to start
+        </div>
       )}
 
       {phonePhase !== "mini" && (
@@ -135,23 +146,19 @@ function DemoApp() {
               : { duration: 0 }
           }
         >
-          <PhoneFrame>
+          <PhoneFrame
+            hexaToggled={hexaToggled}
+            dynamicIslandExpanded={hexaNotificationVisible}
+            dynamicIslandResponded={hexaNotificationResponded}
+            onDynamicIslandChoice={handleTrackChoice}
+          >
             <AnimatePresence mode="wait">
-              {screen === 1 && (
+              {(screen === 1 || (screen === 3 && !showIncomingCall)) && (
                 <motion.div key="home" className="h-full"
                   exit={{ opacity: 0, scale: 1.06 }}
                   transition={{ duration: 0.4, ease: "easeOut" }}
                 >
-                  <HomeScreen onHexaTap={handleHexaTap} />
-                </motion.div>
-              )}
-              {screen >= 2 && (
-                <motion.div key="app" className="h-full"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.3, delay: 0.1 }}
-                >
-                  <HexaApp />
+                  <HomeScreen />
                 </motion.div>
               )}
             </AnimatePresence>
@@ -159,10 +166,8 @@ function DemoApp() {
               {showIncomingCall && screen >= 3 && (
                 <IncomingCall
                   callAccepted={callAccepted}
-                  hexaToggled={hexaToggled}
                   timerFormatted={timer.formatted}
                   onAccept={handleAccept}
-                  onToggleHexa={handleToggleHexa}
                 />
               )}
             </AnimatePresence>

@@ -9,7 +9,7 @@ import { Badge } from "@/components/ui/badge";
 export default function HexaApp() {
   return (
     <div className="flex h-full flex-col bg-card">
-      <div style={{ height: 47, flexShrink: 0 }} />
+      <div style={{ height: 54, flexShrink: 0 }} />
 
       <div className="flex items-center justify-between border-b border-border px-5 py-3">
         <HexaLogo size={22} showText textClassName="text-[13px] text-foreground" />

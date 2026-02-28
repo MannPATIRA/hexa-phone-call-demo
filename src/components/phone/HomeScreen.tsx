@@ -5,16 +5,12 @@ import { Search } from "lucide-react";
 import IosIconMask from "@/components/phone/IosIconMask";
 import { dockIcons, homeIcons } from "@/data/iosHomeIcons";
 
-interface HomeScreenProps {
-  onHexaTap: () => void;
-}
-
 const SF_FONT =
   "-apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif";
 const SF_ROUNDED =
   "-apple-system, BlinkMacSystemFont, 'SF Pro Rounded', 'SF Pro Text', sans-serif";
 
-export default function HomeScreen({ onHexaTap }: HomeScreenProps) {
+export default function HomeScreen() {
   const iconSize = 46;
   const dockIconSize = 46;
 
@@ -28,7 +24,8 @@ export default function HomeScreen({ onHexaTap }: HomeScreenProps) {
       />
 
       <div className="relative z-10 flex h-full flex-col">
-        <div style={{ height: 50, flexShrink: 0 }} />
+        {/* Safe area below notch */}
+        <div style={{ height: 54, flexShrink: 0 }} />
 
         {/* Weather Widget */}
         <div className="mx-[18px] mb-[14px] overflow-hidden rounded-[16px] border border-white/24 bg-[#5ca4e8]/40 shadow-[0_8px_18px_rgba(10,20,40,0.18)] backdrop-blur-[25px]">
@@ -67,8 +64,6 @@ export default function HomeScreen({ onHexaTap }: HomeScreenProps) {
                       ],
                     }}
                     transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
-                    onClick={onHexaTap}
-                    className="cursor-pointer"
                   >
                     <IosIconMask
                       src="/icons/hexa.png"
