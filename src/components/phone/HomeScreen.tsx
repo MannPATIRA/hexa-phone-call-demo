@@ -1,14 +1,11 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Search } from "lucide-react";
 import IosIconMask from "@/components/phone/IosIconMask";
 import { dockIcons, homeIcons } from "@/data/iosHomeIcons";
 
 const SF_FONT =
   "-apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif";
-const SF_ROUNDED =
-  "-apple-system, BlinkMacSystemFont, 'SF Pro Rounded', 'SF Pro Text', sans-serif";
 
 export default function HomeScreen() {
   const iconSize = 46;
@@ -27,30 +24,8 @@ export default function HomeScreen() {
         {/* Safe area below notch */}
         <div style={{ height: 54, flexShrink: 0 }} />
 
-        {/* Weather Widget */}
-        <div className="mx-[18px] mb-[14px] overflow-hidden rounded-[16px] border border-white/24 bg-[#5ca4e8]/40 shadow-[0_8px_18px_rgba(10,20,40,0.18)] backdrop-blur-[25px]">
-          <div
-            className="bg-[linear-gradient(180deg,rgba(83,161,235,0.8)_0%,rgba(73,143,213,0.74)_100%)] px-[14px] py-[12px]"
-          >
-            <p
-              className="text-center text-[10px] leading-[1.38] text-white/88"
-              style={{ fontFamily: SF_ROUNDED, fontWeight: 500 }}
-            >
-              Location access is needed to show
-              <br />
-              weather near you.
-            </p>
-          </div>
-          <div
-            className="border-t border-white/26 bg-black/10 py-[3px] text-center text-[9.5px] text-white/70"
-            style={{ fontFamily: SF_ROUNDED }}
-          >
-            Weather
-          </div>
-        </div>
-
         {/* App Icon Grid */}
-        <div className="flex flex-1 flex-col px-[18px] pt-[2px]">
+        <div className="flex flex-1 flex-col px-[18px] pt-[28px]">
           <div className="grid grid-cols-4 justify-items-center gap-y-[16px] gap-x-[16px]">
             {homeIcons.map((app) => (
               <div key={app.name} className="flex flex-col items-center gap-[4px]">
@@ -93,19 +68,6 @@ export default function HomeScreen() {
                 </span>
               </div>
             ))}
-          </div>
-        </div>
-
-        {/* Search Pill */}
-        <div className="mb-[10px] flex justify-center">
-          <div className="flex items-center justify-center gap-1 rounded-full border border-white/22 bg-white/15 px-[12px] py-[5px] shadow-[inset_0_1px_0_rgba(255,255,255,0.18)] backdrop-blur-[22px]">
-            <Search size={10} className="text-white/62" />
-            <span
-              className="text-white/76"
-              style={{ fontFamily: SF_FONT, fontWeight: 500, fontSize: 10 }}
-            >
-              Search
-            </span>
           </div>
         </div>
 
