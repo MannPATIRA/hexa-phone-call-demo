@@ -81,7 +81,7 @@ export default function CallDetail({
 
         <div className="flex items-center gap-3">
           {!isEnded ? (
-            <Badge className="gap-2 border-red-500/25 bg-red-500/10 px-3 py-1.5 text-red-300">
+            <Badge className="gap-2 border-red-500/25 bg-red-500/10 px-3 py-1.5 text-red-600">
               <motion.div
                 className="h-[6px] w-[6px] rounded-full bg-red-400"
                 animate={{ opacity: [1, 0.3, 1] }}

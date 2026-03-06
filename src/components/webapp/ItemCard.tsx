@@ -121,7 +121,7 @@ export default function ItemCard({ item, isReview, index }: ItemCardProps) {
                 transition={{ duration: 0.8, ease: "easeOut", delay: index * 0.1 }}
               />
             </div>
-            <span className={cn("text-[11px] font-bold tabular-nums", item.confidence >= 90 ? "text-emerald-300" : "text-muted-foreground")}>
+            <span className={cn("text-[11px] font-bold tabular-nums", item.confidence >= 90 ? "text-emerald-600" : "text-muted-foreground")}>
               {item.confidence}%
             </span>
           </div>

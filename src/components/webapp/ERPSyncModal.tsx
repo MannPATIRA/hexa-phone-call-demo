@@ -50,7 +50,7 @@ export default function ERPSyncModal({ onClose }: ERPSyncModalProps) {
             >
               <span className="truncate text-[12px] font-medium text-foreground/85">{item.name}</span>
               <span className="font-mono text-[11px] text-muted-foreground">{item.sku}</span>
-              <span className="flex items-center justify-end gap-1.5 text-[12px] font-medium text-emerald-300">
+              <span className="flex items-center justify-end gap-1.5 text-[12px] font-medium text-emerald-600">
                 <CheckCircle2 size={12} strokeWidth={2} />
                 Synced
               </span>

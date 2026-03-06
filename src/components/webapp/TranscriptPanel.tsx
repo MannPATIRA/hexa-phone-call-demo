@@ -203,7 +203,7 @@ function renderHighlighted(text: string, highlights: string[]) {
         <motion.span
           key={i}
           className="px-[3px] py-[1px]"
-          style={{ backgroundColor: "rgba(250,204,21,0.16)", color: "#FDE68A" }}
+          style={{ backgroundColor: "rgba(250,204,21,0.25)", color: "#B45309" }}
           initial={{ opacity: 0 }}
           animate={{ opacity: [0, 1, 0.7, 1] }}
           transition={{ duration: 0.8 }}

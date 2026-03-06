@@ -108,7 +108,7 @@ export default function ExtractedItemsPanel({
                 {syncLoading ? (
                   <>
                     <motion.div
-                      className="h-3.5 w-3.5 border-2 border-white/30 border-t-white"
+                      className="h-3.5 w-3.5 border-2 border-black/20 border-t-black/70"
                       animate={{ rotate: 360 }}
                       transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
                     />

@@ -25,7 +25,7 @@ export default function BrowserChrome({ children }: BrowserChromeProps) {
             <Input
               readOnly
               value="app.hexa.ai/calls"
-              className="h-8 border-border bg-black/20 pl-8 pr-8 text-xs text-muted-foreground"
+              className="h-8 border-border bg-black/5 pl-8 pr-8 text-xs text-muted-foreground"
             />
             <Search className="absolute right-3 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground" />
           </div>

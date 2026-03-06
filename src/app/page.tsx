@@ -113,14 +113,14 @@ function DemoApp() {
   return (
     <div className="relative h-screen w-screen overflow-hidden bg-background">
       <div className="absolute inset-0 pointer-events-none" style={{
-        backgroundImage: "linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px)",
+        backgroundImage: "linear-gradient(rgba(0,0,0,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.04) 1px, transparent 1px)",
         backgroundSize: "60px 60px",
         maskImage: "radial-gradient(ellipse 60% 60% at 50% 50%, black 20%, transparent 70%)",
         WebkitMaskImage: "radial-gradient(ellipse 60% 60% at 50% 50%, black 20%, transparent 70%)",
       }} />
 
       <div className="absolute inset-0 pointer-events-none" style={{
-        background: "radial-gradient(ellipse 40% 35% at 50% 45%, rgba(194,155,101,0.08) 0%, transparent 100%)",
+        background: "radial-gradient(ellipse 40% 35% at 50% 45%, rgba(194,155,101,0.06) 0%, transparent 100%)",
       }} />
 
       <SpeedControl />
